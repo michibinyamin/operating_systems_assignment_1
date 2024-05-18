@@ -95,14 +95,15 @@ int main()
     char num;
     int size;
     int line_size = 0;
-    // TO-DO: size limit, and bigger then 0
     printf("How many verticies do you want?\n");
-    scanf("%d ", &size);
+    scanf("%d", &size);
     if (size > 1000)
     {
-        printf("too much verticies, needed under 1000");
+        printf("too much verticies, needed under 1000\n");
+        return 1;
     }
-    
+        
+    getchar();  // Consume the newline character after the integer input
 
     // Allocate memory for the graph
     graph = (int**)malloc(size * sizeof(int*));
@@ -136,7 +137,10 @@ int main()
             
             if (!isdigit(num) && num != 32)
             {
-                printf("you put a letter, error \n");
+                if(num == 45)   // 45 is '-'
+                    printf("you used a minus number\n");
+                else
+                    printf("you put a letter, error \n");
                 return 1;
             }
 
@@ -188,9 +192,6 @@ int main()
         while (token != NULL) {        
 
             int number = atoi(token);
-            if(number < 0){
-                printf("you used a negative value");
-            }
             // Convert token to integer and store in graph
             graph[i][rows] = number;
 
